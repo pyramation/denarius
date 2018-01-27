@@ -12,7 +12,7 @@ lessThan(QT_MAJOR_VERSION, 5): CONFIG += static
 QMAKE_CXXFLAGS = -fpermissive
 
 greaterThan(QT_MAJOR_VERSION, 4) {
-    QT += widgets
+    QT += widgets printsupport
     DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0
 }
 
@@ -30,6 +30,18 @@ LIBPNG_INCLUDE_PATH=C:/deps/libpng-1.6.16
 LIBPNG_LIB_PATH=C:/deps/libpng-1.6.16/.libs
 QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.4
 QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.4/.libs
+}
+macx {
+BOOST_INCLUDE_PATH = /usr/local/Cellar/boost@1.57/1.57.0/include
+BOOST_LIB_PATH = /usr/local/Cellar/boost@1.57/1.57.0/
+BDB_INCLUDE_PATH = /usr/local/opt/berkeley-db@4/include
+BDB_LIB_PATH = /usr/local/opt/berkeley-db@4/lib
+OPENSSL_INCLUDE_PATH = /usr/local/opt/openssl/include
+OPENSSL_LIB_PATH = /usr/local/opt/openssl/lib
+MINIUPNPC_INCLUDE_PATH=/usr/local/Cellar/miniupnpc/2.0.20171212/include
+MINIUPNPC_LIB_PATH=/usr/local/Cellar/miniupnpc/2.0.20171212/lib
+QRENCODE_INCLUDE_PATH=/usr/local/Cellar/qrencode/4.0.0/include
+QRENCODE_LIB_PATH=/usr/local/Cellar/qrencode/4.0.0/lib
 }
 
 # for boost 1.37, add -mt to the boost libraries
@@ -460,24 +472,8 @@ isEmpty(BOOST_THREAD_LIB_SUFFIX) {
     BOOST_THREAD_LIB_SUFFIX = $$BOOST_LIB_SUFFIX
 }
 
-isEmpty(BDB_LIB_PATH) {
-    macx:BDB_LIB_PATH = /opt/local/lib/db48
-}
-
 isEmpty(BDB_LIB_SUFFIX) {
     macx:BDB_LIB_SUFFIX = -4.8
-}
-
-isEmpty(BDB_INCLUDE_PATH) {
-    macx:BDB_INCLUDE_PATH = /opt/local/include/db48
-}
-
-isEmpty(BOOST_LIB_PATH) {
-    macx:BOOST_LIB_PATH = /opt/local/lib
-}
-
-isEmpty(BOOST_INCLUDE_PATH) {
-    macx:BOOST_INCLUDE_PATH = /opt/local/include
 }
 
 windows:DEFINES += WIN32
