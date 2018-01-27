@@ -1,36 +1,17 @@
-import subprocess
-import json
-import os
-import os.path
-from collections import OrderedDict
-from helpers import parse_config
-from helpers import write_config
-from helpers import get_config_path
-from helpers import get_external_ip
+from helpers import get_config, write_config, get_external_ip, get_port, get_masternode_key, ensure_config_exists
 
-DCONF=get_config_path()
-PORT=19999
-
-if not os.path.isfile(DCONF):
-  raise Exception("%s is missing" % DCONF)
-
-conf=OrderedDict(parse_config(DCONF))
-
+ensure_config_exists()
+conf=get_config()
 ip=get_external_ip()
-
-try:
-  masternodeprivkey=subprocess.check_output(["./denariusd", "masternode","genkey"])
-except subprocess.CalledProcessError as e:
-  raise Exception( "cannot generate a masternode key" )
 
 conf['listen'] = 1
 conf['logtimestamps'] = 1
 conf['maxconnections'] = 256
-conf['port'] = PORT
+conf['port'] = get_port()
 conf['masternode'] = 1
 conf['externalip'] = ip
 conf['bind'] = ip
-conf['masternodeaddr'] = "%s:%s" % (ip, PORT)
-conf['masternodeprivkey'] = masternodeprivkey
+conf['masternodeaddr'] = "%s:%s" % (ip, get_port())
+conf['masternodeprivkey'] = get_masternode_key()
 
-write_config(DCONF, conf)
+write_config(conf)

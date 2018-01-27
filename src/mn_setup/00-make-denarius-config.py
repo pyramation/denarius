@@ -1,14 +1,7 @@
-import os.path
 from collections import OrderedDict
-from helpers import write_config
-from helpers import get_config_path
-from helpers import get_random_rpcpassword
-from helpers import get_random_rpcuser
+from helpers import write_config, ensure_config_does_not_exist, get_random_rpcuser, get_random_rpcpassword
 
-DCONF=get_config_path()
-
-if os.path.isfile(DCONF):
-  raise Exception("%s exists" % DCONF)
+ensure_config_does_not_exist()
 
 conf=OrderedDict()
 
@@ -18,4 +11,4 @@ conf['testnet'] = 1
 conf['daemon'] = 1
 conf['staking'] = 0
 
-write_config(DCONF, conf)
+write_config(conf)
