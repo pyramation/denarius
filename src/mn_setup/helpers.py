@@ -16,6 +16,12 @@ if 'MN_ALIAS' in os.environ:
 else:
     ALIAS='denarius'
 
+if 'TESTNET' in os.environ:
+    TESTNET=os.environ['TESTNET']
+else:
+    print 'WARNING, USING MAINNET. Set the TESTNET env var to use testnet'
+    TESTNET=0
+
 if 'MN_PORT' in os.environ:
     PORT=os.environ['MN_PORT']
 else:
@@ -48,6 +54,9 @@ def ensure_config_does_not_exist():
     conf = get_config_path()
     if os.path.isfile(conf):
       raise Exception("%s already exists" % conf)
+
+def use_testnet():
+  return TESTNET
 
 def get_port():
   return PORT

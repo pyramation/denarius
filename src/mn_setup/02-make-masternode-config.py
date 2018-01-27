@@ -1,6 +1,3 @@
-import subprocess
-import os
-import os.path
 from collections import OrderedDict
 from helpers import ensure_config_exists, write_mn_config, get_random_alias, get_masternode_outputs
 

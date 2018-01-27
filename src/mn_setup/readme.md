@@ -6,10 +6,11 @@ original source: https://denariustalk.org/index.php?/topic/129-dnr-masternode-se
 
 # TODO
 
-- [ ] add a flag for testnet
-- [ ] move variables to env variables
+- [x] add a flag for testnet
+- [x] move variables to env variables
 - [ ] double check assumptions w dnr devs
 - [ ] add better documention
+- [ ] try doing walletpassphrase before start-alias and see if it works
 
 # setup
 
@@ -21,6 +22,7 @@ navigate to `denarius/src` where `./denariusd` lives, for now you can just run t
 
 ```sh
 export MN_ALIAS=pyramation
+export TESTNET=1
 ```
 
 ### generate the config
@@ -79,4 +81,22 @@ If the output says “ masternode is stopped ” then run the following command:
 
 ```sh
 ./denriusd masternode start
+```
+
+
+## notes
+
+to get the alias name
+
+```sh
+cat ~/.denarius/masternode.conf
+```
+
+you may to to use `walletpassphrase` to start the alias, so far this order works:
+
+```sh
+./denariusd masternode start-alias <aliasname>
+./denariusd walletpassphrase <passphrase> 10000000
+./denariusd masternode start
+./denariusd masternode debug
 ```
