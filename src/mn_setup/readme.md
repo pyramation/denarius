@@ -6,6 +6,7 @@ original source: https://denariustalk.org/index.php?/topic/129-dnr-masternode-se
 
 # TODO
 
+- [ ] add a flag for testnet
 - [ ] move variables to env variables
 - [ ] double check assumptions w dnr devs
 - [ ] add better documention
